@@ -1,0 +1,19 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: ehsan.ashouri@britinsurance.com
+    # Name of a secret used to store the ACME account private key
+    privateKeySecretRef:
+      name: letsencrypt
+    # ACME DNS-01 provider configurations
+    solvers:
+      - dns01:
+          cloudDNS:
+            # The ID of the GCP project
+            # reference: https://docs.cert-manager.io/en/latest/tasks/issuers/setup-acme/dns01/google.html
+            project: ki-k8s-nonproduction-538d # TODO Change in overlays
+        selector: {}
